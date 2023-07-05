@@ -6,8 +6,6 @@ import torch.utils.data as Data
 from myutil.dataset import FenLiangSteps
 from myutil.model_0 import GTrend,LTrend
 from myutil.train import train,test
-import sys
-import requests
 
 train_x = pd.read_csv("data/train_stl_res_2.csv")
 train_label = pd.read_csv("data/train_res.csv")
