@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from statsmodels.tsa.seasonal import STL
 
-data = pd.read_csv("SM_AL02_5cm.csv")
+data = pd.read_csv("data/SM_AL02_5cm.csv")
 data["time"] = pd.to_datetime(data[["year","month","day","hour"]])
 data.set_index("time",inplace=True)
 data.drop(["year","month","day","hour"],axis=1,inplace=True)
