@@ -8,14 +8,16 @@ data.set_index("time",inplace=True)
 data.drop(["year","month","day","hour"],axis=1,inplace=True)
 
 data["vmc"] = data["VMC"]*(2/(data["VMC"].max()-data["VMC"].min()))+1-(2*data["VMC"].max()/(data["VMC"].max()-data["VMC"].min()))
+data.to_csv("data/data_res.csv",index=False)
 
 train = data.iloc[0:31720,:]
+train.to_csv("data/train_res.csv",index=False)
 
 
 train_res = STL(train["vmc"],period=24*365,seasonal=7).fit()
 train_dec_res = pd.DataFrame({"trend":train_res.trend,"season":train_res.seasonal,"resid":train_res.resid})
-train_dec_res.to_csv("train_stl_res_2.csv",index=False)
+train_dec_res.to_csv("data/train_stl_res_2.csv",index=False)
 
 data_res = STL(data["vmc"],period=24*365,seasonal=7).fit()
 data_dec_res = pd.DataFrame({"trend":data_res.trend,"season":data_res.seasonal,"resid":data_res.resid})
-data_dec_res.to_csv("data_stl_res_2.csv",index=False)
+data_dec_res.to_csv("data/data_stl_res_2.csv",index=False)
