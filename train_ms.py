@@ -62,11 +62,11 @@ for i,model in enumerate(models):
         train_metric_list.append(train_metric)
         test_metric_list.append(test_metric[0:6])
     
-        #save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
-        #                 "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
-        #torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
+        save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
+                         "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
+        torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
 
-    #save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
-    #             "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
-    #torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
+    save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
+                 "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
+    torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
 
