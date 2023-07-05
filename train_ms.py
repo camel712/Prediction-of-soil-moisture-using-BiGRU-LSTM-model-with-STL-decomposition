@@ -25,7 +25,7 @@ t_model = GTrend(window=24*365,hidden_dim=32,num_layers=1,dropout=0,bidirectiona
 s_model = LTrend(window=24*365,hidden_dim=32,num_layers=1,dropout=0,bidirectional=False,is_cuda=True,steps=step).to(device)
 r_model = LTrend(window=24*365,hidden_dim=32,num_layers=1,dropout=0,bidirectional=False,is_cuda=True,steps=step).to(device)
 models = [t_model,s_model,r_model]
-epochs_list = [1,1,1]
+epochs_list = [100,100,100]
 for i,model in enumerate(models):
     
     train_dataset = FenLiangSteps(x_data=train_x.to_numpy(),y_data=train_label["vmc"].to_numpy(),
