@@ -6,6 +6,7 @@ import torch.utils.data as Data
 from myutil.dataset import FenLiangSteps
 from myutil.model_0 import GTrend,LTrend
 from myutil.train import train,test
+import sys
 
 train_x = pd.read_csv("data/train_stl_res_2.csv")
 train_label = pd.read_csv("data/train_res.csv")
@@ -24,7 +25,7 @@ t_model = GTrend(window=24*365,hidden_dim=32,num_layers=1,dropout=0,bidirectiona
 s_model = LTrend(window=24*365,hidden_dim=32,num_layers=1,dropout=0,bidirectional=False,is_cuda=True,steps=step).to(device)
 r_model = LTrend(window=24*365,hidden_dim=32,num_layers=1,dropout=0,bidirectional=False,is_cuda=True,steps=step).to(device)
 models = [t_model,s_model,r_model]
-epochs_list = [100,100,100]
+epochs_list = [1,1,1]
 for i,model in enumerate(models):
     
     train_dataset = FenLiangSteps(x_data=train_x.to_numpy(),y_data=train_label["vmc"].to_numpy(),
@@ -61,11 +62,11 @@ for i,model in enumerate(models):
         train_metric_list.append(train_metric)
         test_metric_list.append(test_metric[0:6])
     
-        save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
-                         "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
-        torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
+        #save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
+        #                 "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
+        #torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
 
-    save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
-                 "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
-    torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
+    #save_dict = {"model_param":model.state_dict(),"optim_param":optimizer.state_dict(),
+    #             "epoch":t,"train_metric_list":train_metric_list,"test_metric_list":test_metric_list}
+    #torch.save(save_dict, f"{path}epoch{t}_rmse_{test_metric[1]:>5f}.pth")
 
